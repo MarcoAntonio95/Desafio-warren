@@ -36,5 +36,5 @@ protocol CoordinatorTitleDelegate: AnyObject {
 }
 
 enum CoordinatorType {
-    case root, initial, portfolios, details
+    case root, initial, login, portfolios, details
 }

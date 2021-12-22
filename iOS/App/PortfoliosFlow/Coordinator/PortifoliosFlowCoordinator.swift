@@ -37,6 +37,8 @@ class PortfoliosFlowCoordinator: Coordinator, PortfoliosFlowCoordinatorProtocol 
     func startPortfoliosViewController() {
         let portfoliosViewModel = PortfoliosViewModel(coordinator: self)
         let portfoliosVC: PortfoliosViewController = .init(viewModel: portfoliosViewModel)
-        navigationController.pushViewController(portfoliosVC, animated: true)
+        navigationController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        navigationController.present(portfoliosVC, animated: true, completion: nil)
+//        navigationController.pushViewController(portfoliosVC, animated: true)
     }
 }

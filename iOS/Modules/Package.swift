@@ -50,7 +50,10 @@ let package = Package(
         .package(
             url: "https://github.com/Moya/Moya.git",
             from: "14.0.0"
-        )
+        ),
+        .package(
+            url: "https://github.com/ReactiveX/RxSwift.git",
+            from:"5.1.1")
     ],
     targets: [
         // MARK: - Root
@@ -61,7 +64,9 @@ let package = Package(
             name: "RootElements",
             dependencies: [
                 "LoggingOSLog",
-                "Tagged"
+                "Tagged",
+                "RxSwift",
+                "RxCocoa"
             ]
         ),
         .testTarget(
@@ -70,7 +75,7 @@ let package = Package(
                 "RootElements"
             ]
         ),
-
+        
         /// This module contains the all the functionality that connects to an external service.
         /// Like API calls, Endpoints, Keychain etc.
         .target(
@@ -101,7 +106,6 @@ let package = Package(
                 "FeatureLogin"
             ]
         ),
-
         // MARK: - App
         .target(
             name: "App",
@@ -114,6 +118,6 @@ let package = Package(
             dependencies: [
                 "App"
             ]
-        )
+        ),
     ]
 )
