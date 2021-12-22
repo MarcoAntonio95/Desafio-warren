@@ -37,6 +37,15 @@ class  LoginFlowCoordinator: Coordinator, LoginFlowCoordinatorProtocol {
     func startLoginViewController() {
         let loginViewModel = LoginViewModel(coordinator: self)
         let loginVC: LoginViewController = .init(viewModel: loginViewModel)
-        navigationController.pushViewController(loginVC, animated: true)
+        if #available(iOS 15.0, *) {
+            if let sheet = loginVC.sheetPresentationController {
+                sheet.detents = [.medium(), .large()]
+                sheet.largestUndimmedDetentIdentifier = .large
+                sheet.prefersScrollingExpandsWhenScrolledToEdge = false
+                sheet.prefersEdgeAttachedInCompactHeight = true
+                sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
+            }
+        }
+        navigationController.present(loginVC, animated: true, completion: nil)
     }
 }

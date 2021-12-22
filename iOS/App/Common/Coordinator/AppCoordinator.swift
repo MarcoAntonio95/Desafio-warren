@@ -31,21 +31,28 @@ class AppCoordinator: AppCoordinatorProtocol {
         showInitialFlow()
     }
         
-    func showInitialFlow() {
+    internal func showInitialFlow() {
         let initialFlowCoordinator = InitialFlowCoordinator.init(navigationController)
         initialFlowCoordinator.finishDelegate = self
-        initialFlowCoordinator.start()
         childCoordinators.append(initialFlowCoordinator)
+        initialFlowCoordinator.start()
     }
     
-    func startPortfoliosFlow() {
+    internal func startLoginFlow(){
+        let loginFlowCoordinator = LoginFlowCoordinator.init(navigationController)
+        loginFlowCoordinator.finishDelegate = self
+        childCoordinators.append(loginFlowCoordinator)
+        loginFlowCoordinator.start()
+    }
+    
+    internal func startPortfoliosFlow() {
         let portfoliosFlowCoordinator = PortfoliosFlowCoordinator.init(navigationController)
         portfoliosFlowCoordinator.finishDelegate = self
         portfoliosFlowCoordinator.start()
         childCoordinators.append(portfoliosFlowCoordinator)
     }
     
-    func startDetailsFlow() {
+    internal func startDetailsFlow() {
         let detailsFlowCoordinator = DetailsFlowCoordinator.init(navigationController)
         detailsFlowCoordinator.finishDelegate = self
         detailsFlowCoordinator.start()
@@ -62,6 +69,9 @@ extension AppCoordinator: CoordinatorFinishDelegate {
             print("📱 root")
         case .initial:
             print("📱 initial")
+            self.startLoginFlow()
+        case .login:
+            print("📱 login")
             self.startPortfoliosFlow()
         case .portfolios:
             print("📱 portfolios")

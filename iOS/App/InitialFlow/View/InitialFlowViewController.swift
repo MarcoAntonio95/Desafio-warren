@@ -72,13 +72,11 @@ class InitialFlowViewController: UIViewController {
    
     fileprivate func buildHierarchy() {
         self.view.addSubview(titleLabel)
-//        self.view.insertSubview(loginButton, aboveSubview: greyView)
         self.view.addSubview(greyView)
         self.greyView.addSubview(loginButton)
    }
    
     fileprivate func buildConstraints() {
-     
         NSLayoutConstraint.activate([
             self.titleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: (self.view.frame.height*0.3)),
             self.titleLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
