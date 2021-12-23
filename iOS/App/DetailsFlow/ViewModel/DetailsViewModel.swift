@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 final class DetailsViewModel {
 
@@ -16,6 +18,10 @@ final class DetailsViewModel {
         self.coordinator = coordinator
     }
 
+    func downloadJSONImage(imageUrl: String) -> Observable<Data> {
+        return APIService.sharedInstance.downloadJSONImage(imageUrl: imageUrl)
+    }
+    
     func finishFlow(){
         self.coordinator.finish()
     }

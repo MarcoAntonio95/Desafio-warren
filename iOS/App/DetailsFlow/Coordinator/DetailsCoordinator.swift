@@ -10,10 +10,11 @@ import Foundation
 import UIKit
 
 protocol DetailsFlowCoordinatorProtocol: Coordinator {
-    func startDetailsViewController()
+    func startDetailsViewController(_ currentPortfolio: Portfolio)
 }
 
 class  DetailsFlowCoordinator: Coordinator, DetailsFlowCoordinatorProtocol {
+    
      var finishDelegate: CoordinatorFinishDelegate?
     
     var navigationController: UINavigationController
@@ -27,16 +28,23 @@ class  DetailsFlowCoordinator: Coordinator, DetailsFlowCoordinatorProtocol {
     }
         
     func start() {
-        startDetailsViewController()
+        startDetailsViewController(Portfolio())
+    }
+    
+    func startWithData(currentPortfolio: Portfolio){
+        self.startDetailsViewController(currentPortfolio)
     }
     
     deinit {
         print("DetailsFlowCoordinator deinit")
     }
     
-    func startDetailsViewController() {
+    internal func startDetailsViewController(_ detailPortfolio:Portfolio) {
         let detailsViewModel = DetailsViewModel(coordinator: self)
         let detailsVC: DetailsViewController = .init(viewModel: detailsViewModel)
+        if !detailPortfolio.id.isEmpty {
+            detailsVC.currentPortfolio = detailPortfolio
+        }
         navigationController.pushViewController(detailsVC, animated: true)
     }
 }

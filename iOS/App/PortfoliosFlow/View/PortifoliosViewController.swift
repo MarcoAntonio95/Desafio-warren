@@ -25,7 +25,6 @@ class PortfoliosViewController: UIViewController {
     // MARK: Varbles & Constants
     private var portfoliosViewModel: PortfoliosViewModel
     private let disposeBag = DisposeBag()
-    private let tappedPortfolio = Portfolio()
     
     init(viewModel: PortfoliosViewModel){
         self.portfoliosViewModel = viewModel
@@ -43,17 +42,11 @@ class PortfoliosViewController: UIViewController {
     
     // MARK: UI Setup
     func buildView() {
-        self.view.backgroundColor = #colorLiteral(red: 0.1802104115, green: 0.1840381324, blue: 0.2006301582, alpha: 1)
+        self.view.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         self.buildHierarchy()
         self.buildConstraints()
         self.buildRxBindings()
         self.buildUIActions()
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if (segue.identifier == "showDetail") {
-            let detailsVC = segue.destination as! DetailsViewController
-        }
     }
     
     fileprivate func buildHierarchy() {
@@ -77,22 +70,18 @@ class PortfoliosViewController: UIViewController {
             
             guard let imageUrl = item.background["small"] else { return }
             
-            var imageData = Data()
-            
-            if imageData.isEmpty {
-                self.portfoliosViewModel.downloadJSONImage(imageUrl: imageUrl).bind { data in
-                    DispatchQueue.main.async {
-                        imageData = data
-                        cell.imagePortfolio.image = UIImage(data: imageData)
-                    }
-                }.disposed(by: self.disposeBag)
-            }
+            self.portfoliosViewModel.downloadJSONImage(imageUrl: imageUrl).bind { data in
+                DispatchQueue.main.async {
+                    cell.imagePortfolio.image = UIImage(data: data)
+                }
+            }.disposed(by: self.disposeBag)
         }.disposed(by: self.disposeBag)
     }
     
     fileprivate func buildUIActions() {
         self.portfoliosTableView.rx.modelSelected(Portfolio.self).bind { portfolio in
-            self.performSegue(withIdentifier: "showDetail", sender: self)
+            let portfoliodata = portfolio as Any
+            self.portfoliosViewModel.startDetailsFlow(currentPortfolio: portfoliodata)
         }.disposed(by: self.disposeBag)
     }
 

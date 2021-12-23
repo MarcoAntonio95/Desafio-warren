@@ -18,8 +18,8 @@ final class PortfoliosViewModel {
         self.coordinator = coordinator
     }
 
-    func startDetailsFlow(){
-        self.coordinator.finish()
+    func startDetailsFlow(currentPortfolio: Any){
+        self.coordinator.finishWithData(data: currentPortfolio)
     }
     
     func getAllPortfolios() -> Observable<[Portfolio]> {
