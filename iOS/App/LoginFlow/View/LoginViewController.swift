@@ -12,6 +12,16 @@ import RxCocoa
 
 class LoginViewController: UIViewController {
     
+    private lazy var titleLabel: UILabel = {
+        let title = UILabel(frame: .zero)
+        title.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        title.textAlignment = .center
+        title.text = "Welcome!"
+        title.font = UIFont(name: "DIN Alternate Bold", size: 22)
+        title.translatesAutoresizingMaskIntoConstraints = false
+        return title
+    }()
+    
     private lazy var errorLabel: UILabel = {
         let error = UILabel(frame: .zero)
         error.textColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
@@ -30,6 +40,7 @@ class LoginViewController: UIViewController {
         email.layer.borderColor = #colorLiteral(red: 0.8682464957, green: 0.1781739593, blue: 0.3401823342, alpha: 1)
         email.placeholder = "  email:"
         email.layer.cornerRadius = 20
+        email.text = "mobile_test@warrenbrasil.com"
         email.translatesAutoresizingMaskIntoConstraints = false
         return email
     }()
@@ -42,6 +53,7 @@ class LoginViewController: UIViewController {
         password.layer.cornerRadius = 20
         password.isEnabled = true
         password.isSecureTextEntry = true
+        password.text = "Warren123!"
         password.translatesAutoresizingMaskIntoConstraints = false
         return password
     }()
@@ -67,7 +79,7 @@ class LoginViewController: UIViewController {
         return view
     }()
     
-    // MARK: Varbles & constants
+    // MARK: Varbles & Constants
     private var loginViewModel: LoginViewModel
     private let disposeBag = DisposeBag()
     
@@ -96,6 +108,7 @@ class LoginViewController: UIViewController {
     
     func buildHierarchy() {
         self.view.addSubview(greyView)
+        self.greyView.addSubview(titleLabel)
         self.greyView.addSubview(errorLabel)
         self.greyView.addSubview(emailTextField)
         self.greyView.addSubview(passwordTextField)
@@ -108,6 +121,10 @@ class LoginViewController: UIViewController {
             self.greyView.widthAnchor.constraint(equalToConstant: (self.view.frame.width*0.8)),
             self.greyView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
             self.greyView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            
+            self.titleLabel.leadingAnchor.constraint(equalTo: self.greyView.leadingAnchor, constant: 16),
+            self.titleLabel.trailingAnchor.constraint(equalTo: self.greyView.trailingAnchor, constant: -16),
+            self.titleLabel.bottomAnchor.constraint(equalTo: self.errorLabel.topAnchor, constant: -8),
             
             self.errorLabel.leadingAnchor.constraint(equalTo: self.greyView.leadingAnchor, constant: 16),
             self.errorLabel.trailingAnchor.constraint(equalTo: self.greyView.trailingAnchor, constant: -16),
@@ -140,15 +157,21 @@ class LoginViewController: UIViewController {
       self.loginButton.rx.tap.subscribe(onNext: {
             [weak self] in
             guard let `self` = self else { return }
-          self.loginViewModel.login(email: self.emailTextField.text!, password: self.passwordTextField.text!).subscribe( onNext: { _ in
-              self.loginViewModel.finishFlow()
+          
+          LoadingView.sharedInstance.showIndicatorInView(currentView: self.view)
+          
+          self.loginViewModel.login(email: self.emailTextField.text!, password: self.passwordTextField.text!).subscribe(
+              onNext: { _ in
+                  self.loginViewModel.finishFlow()
               },
               onError: { errorMsg in
+                  LoadingView.sharedInstance.hideIndicator()
                   DispatchQueue.main.async {
                       self.errorLabel.text = errorMsg.localizedDescription
                       self.errorLabel.isHidden = false
                   }
-            }).disposed(by: self.disposeBag)
+              }
+          ).disposed(by: self.disposeBag)
         }).disposed(by: self.disposeBag)
     }
 

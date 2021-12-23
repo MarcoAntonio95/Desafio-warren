@@ -18,7 +18,7 @@ class InitialFlowViewController: UIViewController {
         title.text = "#Desafio\nWarren"
         title.numberOfLines = 2
         title.lineBreakMode = .byWordWrapping
-        title.font = UIFont.boldSystemFont(ofSize: 36)
+        title.font = UIFont(name: "DIN Alternate Bold", size: 36)
         title.textColor = UIColor.white
         title.textAlignment = .left
         title.translatesAutoresizingMaskIntoConstraints = false

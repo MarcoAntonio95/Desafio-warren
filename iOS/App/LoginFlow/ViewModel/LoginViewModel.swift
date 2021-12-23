@@ -40,8 +40,8 @@ final class LoginViewModel {
     func login(email:String,password:String) -> Observable<String> {
        return APIService.sharedInstance.postLoginInAPI(email: email, password: password)
     }
-    
+
     func finishFlow(){
-        self.coordinator.finish()
+        self.coordinator.dismissSheet()
     }
 }

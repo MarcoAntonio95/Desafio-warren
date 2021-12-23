@@ -46,6 +46,11 @@ class  LoginFlowCoordinator: Coordinator, LoginFlowCoordinatorProtocol {
                 sheet.widthFollowsPreferredContentSizeWhenEdgeAttached = true
             }
         }
-        navigationController.present(loginVC, animated: true, completion: nil)
+        self.navigationController.present(loginVC, animated: true, completion: nil)
+    }
+    
+    func dismissSheet(){
+        self.navigationController.dismiss(animated: true)
+        self.finish()
     }
 }

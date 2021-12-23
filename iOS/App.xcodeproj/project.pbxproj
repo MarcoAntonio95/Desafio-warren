@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F3A42572773A83D0083C6F9 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A42562773A83D0083C6F9 /* LoadingView.swift */; };
+		2F56427E2773C1D8004DBCC1 /* Portfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56427D2773C1D8004DBCC1 /* Portfolio.swift */; };
+		2F5642802773C508004DBCC1 /* PortfolioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56427F2773C508004DBCC1 /* PortfolioTableViewCell.swift */; };
 		2F8403772772D4AE0054A045 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8403762772D4AE0054A045 /* LoginCoordinator.swift */; };
 		2F8403792772D51F0054A045 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8403782772D51F0054A045 /* LoginViewModel.swift */; };
 		2F84037B2772D5690054A045 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F84037A2772D5690054A045 /* LoginViewController.swift */; };
@@ -42,6 +45,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2F3A42562773A83D0083C6F9 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		2F56427D2773C1D8004DBCC1 /* Portfolio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Portfolio.swift; sourceTree = "<group>"; };
+		2F56427F2773C508004DBCC1 /* PortfolioTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioTableViewCell.swift; sourceTree = "<group>"; };
 		2F8403762772D4AE0054A045 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
 		2F8403782772D51F0054A045 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		2F84037A2772D5690054A045 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +94,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F3A42552773A7CD0083C6F9 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2F3A42562773A83D0083C6F9 /* LoadingView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2F56427C2773C16B004DBCC1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2F56427D2773C1D8004DBCC1 /* Portfolio.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		2F8403722772D4320054A045 /* LoginFlow */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +163,7 @@
 		2FEF63B3277148FA006882D6 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				2F3A42552773A7CD0083C6F9 /* View */,
 				2F84037C2772E73C0054A045 /* Model */,
 				2FEF63B42771490E006882D6 /* Coordinator */,
 			);
@@ -159,6 +182,7 @@
 		2FEF63BF27714B43006882D6 /* PortfoliosFlow */ = {
 			isa = PBXGroup;
 			children = (
+				2F56427C2773C16B004DBCC1 /* Model */,
 				2FEF63C227714B70006882D6 /* Coordinator */,
 				2FEF63C127714B68006882D6 /* ViewModel */,
 				2FEF63C027714B60006882D6 /* View */,
@@ -170,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				2FEF63C327714BA4006882D6 /* PortifoliosViewController.swift */,
+				2F56427F2773C508004DBCC1 /* PortfolioTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -367,7 +392,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1310;
 				ORGANIZATIONNAME = Warren;
 				TargetAttributes = {
 					332C227623FEBCE0007823E5 = {
@@ -423,6 +448,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F5642802773C508004DBCC1 /* PortfolioTableViewCell.swift in Sources */,
 				2F84037F2772E7540054A045 /* APIService.swift in Sources */,
 				2FEF63ED27718B71006882D6 /* DetailViewController.swift in Sources */,
 				2FEF63EF27718B89006882D6 /* DetailsCoordinator.swift in Sources */,
@@ -435,11 +461,13 @@
 				2F8403792772D51F0054A045 /* LoginViewModel.swift in Sources */,
 				2FEF63C427714BA5006882D6 /* PortifoliosViewController.swift in Sources */,
 				2FEF63C827717C74006882D6 /* Coordinator.swift in Sources */,
+				2F56427E2773C1D8004DBCC1 /* Portfolio.swift in Sources */,
 				332C227B23FEBCE0007823E5 /* AppDelegate.swift in Sources */,
 				2F84037B2772D5690054A045 /* LoginViewController.swift in Sources */,
 				2FEF63E32771861B006882D6 /* InitialFlowCoordinator.swift in Sources */,
 				2FEF63C627714D5D006882D6 /* PortifoliosFlowCoordinator.swift in Sources */,
 				332C227D23FEBCE0007823E5 /* SceneDelegate.swift in Sources */,
+				2F3A42572773A83D0083C6F9 /* LoadingView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +527,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -559,6 +588,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;

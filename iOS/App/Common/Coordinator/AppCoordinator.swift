@@ -50,6 +50,7 @@ class AppCoordinator: AppCoordinatorProtocol {
         portfoliosFlowCoordinator.finishDelegate = self
         portfoliosFlowCoordinator.start()
         childCoordinators.append(portfoliosFlowCoordinator)
+       
     }
     
     internal func startDetailsFlow() {

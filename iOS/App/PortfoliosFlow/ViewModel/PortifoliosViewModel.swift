@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 final class PortfoliosViewModel {
 
@@ -18,5 +20,13 @@ final class PortfoliosViewModel {
 
     func startDetailsFlow(){
         self.coordinator.finish()
+    }
+    
+    func getAllPortfolios() -> Observable<[Portfolio]> {
+        return APIService.sharedInstance.fetchAllPortfolios()
+    }
+    
+    func downloadJSONImage(imageUrl: String) -> Observable<Data> {
+        return APIService.sharedInstance.downloadJSONImage(imageUrl: imageUrl)
     }
 }
