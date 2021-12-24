@@ -2,7 +2,7 @@
 //  DetailsCoordinator.swift
 //  App
 //
-//  Created by Matheus Lutero on 21/12/21.
+//  Created by Marco Antonio on 21/12/21.
 //  Copyright © 2021 Warren. All rights reserved.
 //
 
@@ -10,12 +10,12 @@ import Foundation
 import UIKit
 
 protocol DetailsFlowCoordinatorProtocol: Coordinator {
-    func startDetailsViewController(_ currentPortfolio: Portfolio)
+    func startDetailsViewController(_ currentPortfolio: Portfolio, _ fromCordinator: Coordinator)
 }
 
 class  DetailsFlowCoordinator: Coordinator, DetailsFlowCoordinatorProtocol {
     
-     var finishDelegate: CoordinatorFinishDelegate?
+    var finishDelegate: CoordinatorFinishDelegate?
     
     var navigationController: UINavigationController
     
@@ -28,23 +28,22 @@ class  DetailsFlowCoordinator: Coordinator, DetailsFlowCoordinatorProtocol {
     }
         
     func start() {
-        startDetailsViewController(Portfolio())
     }
     
-    func startWithData(currentPortfolio: Portfolio){
-        self.startDetailsViewController(currentPortfolio)
+    func startWithData(currentPortfolio: Portfolio, fromCordinator: Coordinator){
+        self.startDetailsViewController(currentPortfolio,fromCordinator)
     }
     
     deinit {
         print("DetailsFlowCoordinator deinit")
     }
     
-    internal func startDetailsViewController(_ detailPortfolio:Portfolio) {
+    internal func startDetailsViewController(_ detailPortfolio:Portfolio,_ fromCordinator: Coordinator) {
         let detailsViewModel = DetailsViewModel(coordinator: self)
         let detailsVC: DetailsViewController = .init(viewModel: detailsViewModel)
         if !detailPortfolio.id.isEmpty {
             detailsVC.currentPortfolio = detailPortfolio
         }
-        navigationController.pushViewController(detailsVC, animated: true)
+        fromCordinator.navigationController.pushViewController(detailsVC, animated: true)
     }
 }

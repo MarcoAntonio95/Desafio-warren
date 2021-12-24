@@ -112,7 +112,7 @@ class APIService {
             }
     }
     
-    func downloadJSONImage(imageUrl:String) -> Observable<Data> {
+    func downloadImageFromJSON(imageUrl:String) -> Observable<Data> {
         return Observable.create { imgObserver -> Disposable in
             guard let url = URL(string: imageUrl) else {return imgObserver.onError(NSError(domain: "Url Invalid", code: 0, userInfo: nil)) as! Disposable}
             let request = URLRequest(url: url)

@@ -53,15 +53,14 @@ class AppCoordinator: AppCoordinatorProtocol {
        
     }
     
-    internal func startDetailsFlow(_ portfolio:Any ) {
+    internal func startDetailsFlow(_ portfolio:Any,_ childCoordinator: Coordinator) {
         let detailsFlowCoordinator = DetailsFlowCoordinator.init(navigationController)
-        
-        if let portfolioData = portfolio as? Portfolio {
-            detailsFlowCoordinator.startWithData(currentPortfolio: portfolioData)
-        }
-        
         detailsFlowCoordinator.finishDelegate = self
         childCoordinators.append(detailsFlowCoordinator)
+        
+        if let portfolioData = portfolio as? Portfolio {
+            detailsFlowCoordinator.startWithData(currentPortfolio: portfolioData, fromCordinator: childCoordinator)
+        }
     }
 }
 
@@ -80,8 +79,7 @@ extension AppCoordinator: CoordinatorFinishDelegate {
             print("📱 login")
             self.startPortfoliosFlow()
         case .portfolios:
-            print("📱 portfolios")
-            self.startDetailsFlow("")
+            break
         case .details:
             print("📱 detail")
             self.startPortfoliosFlow()
@@ -93,7 +91,7 @@ extension AppCoordinator: CoordinatorFinishDelegate {
         
         if childCoordinator.type  == .portfolios {
             print("📱 portfolios 📱")
-            self.startDetailsFlow(data)
+            self.startDetailsFlow(data,childCoordinator)
         }
     }
 }

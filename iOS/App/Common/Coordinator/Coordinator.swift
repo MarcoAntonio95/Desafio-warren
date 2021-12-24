@@ -27,7 +27,6 @@ extension Coordinator {
     }
     
     func finishWithData(data: Any){
-        childCoordinators.removeAll()
         finishDelegate?.coordinatorDidFinishWithData(data: data, childCoordinator: self)
     }
 }

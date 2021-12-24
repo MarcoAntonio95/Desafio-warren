@@ -27,6 +27,6 @@ final class PortfoliosViewModel {
     }
     
     func downloadJSONImage(imageUrl: String) -> Observable<Data> {
-        return APIService.sharedInstance.downloadJSONImage(imageUrl: imageUrl)
+        return APIService.sharedInstance.downloadImageFromJSON(imageUrl: imageUrl)
     }
 }

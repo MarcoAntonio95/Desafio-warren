@@ -22,8 +22,8 @@ public class LoadingView {
         blurImg.backgroundColor = UIColor.black
         blurImg.isUserInteractionEnabled = true
         blurImg.alpha = 0.5
-        indicator.style = .large
         
+        indicator.style = .large
         indicator.center = blurImg.center
         indicator.color = #colorLiteral(red: 0.8682464957, green: 0.1781739593, blue: 0.3401823342, alpha: 1)
         indicator.startAnimating()
@@ -45,11 +45,28 @@ public class LoadingView {
     }
     
     func hideIndicator(){
-
-        DispatchQueue.main.async( execute:
-            {
+        DispatchQueue.main.async {
                 self.blurImg.removeFromSuperview()
                 self.indicator.removeFromSuperview()
-        })
+        }
+    }
+}
+
+extension LoadingView {
+    func showLoadingInImageView(currentImageView: UIImageView){
+        DispatchQueue.main.async {
+            currentImageView.addSubview(self.blurImg)
+            self.indicator.style = .large
+            self.indicator.startAnimating()
+            self.indicator.center.y = (currentImageView.frame.height/2)
+            self.indicator.center.x = (currentImageView.frame.width/2)
+            currentImageView.addSubview(self.indicator)
+        }
+    }
+    
+    func hideLoadingInImageView(){
+        DispatchQueue.main.async {
+            self.indicator.removeFromSuperview()
+        }
     }
 }

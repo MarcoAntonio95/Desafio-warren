@@ -75,7 +75,7 @@ class DetailsViewController: UIViewController {
     private lazy var backButton: UIButton = {
         let button = UIButton(frame: .zero)
         button.backgroundColor = #colorLiteral(red: 0.8682464957, green: 0.1781739593, blue: 0.3401823342, alpha: 1)
-        button.layer.cornerRadius = 16
+        button.layer.cornerRadius = 24
         button.setTitle("Back", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
@@ -101,6 +101,12 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         buildView()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if self.portfolioImage.image?.pngData() == nil {
+            LoadingView.sharedInstance.showLoadingInImageView(currentImageView: portfolioImage)
+        }
     }
     
     // MARK: UI Setup
@@ -152,7 +158,7 @@ class DetailsViewController: UIViewController {
             self.backButton.topAnchor.constraint(equalTo: self.goalAmountLabel.bottomAnchor, constant: 16),
             self.backButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             self.backButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            self.backButton.heightAnchor.constraint(equalToConstant: 32),
+            self.backButton.heightAnchor.constraint(equalToConstant: 48),
             
         ])
     }
@@ -167,18 +173,22 @@ class DetailsViewController: UIViewController {
     fileprivate func buildRxBindings(){
         guard let imgUrl = self.currentPortfolio.background["regular"] else {return}
         
-        self.detailsViewModel.downloadJSONImage(imageUrl: imgUrl).bind { data in
+        self.detailsViewModel.downloadPortfolioImage(imageUrl: imgUrl).bind { data in
             DispatchQueue.main.async {
+                if self.portfolioImage.image?.pngData() == nil {
+                    LoadingView.sharedInstance.hideLoadingInImageView()
+                }
                 self.portfolioImage.image = UIImage(data: data)
             }
         }.disposed(by: self.disposeBag)
+        
     }
 
     fileprivate func buildUIActions() {
         self.backButton.rx.tap.subscribe(onNext: {
               [weak self] in
               guard let `self` = self else { return }
-            self.detailsViewModel.finishFlow()
+            self.detailsViewModel.returnToPortfolios()
         }).disposed(by: self.disposeBag)
     }
 }
