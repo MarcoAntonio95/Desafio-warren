@@ -2,7 +2,7 @@
 //  InitialFlowViewController.swift
 //  App
 //
-//  Created by Matheus Lutero on 21/12/21.
+//  Created by Marco Antonio on 21/12/21.
 //  Copyright © 2021 Warren. All rights reserved.
 //
 
@@ -13,6 +13,7 @@ import RxSwift
 
 class InitialFlowViewController: UIViewController {
 
+    // MARK: UI Components
     lazy var titleLabel: UILabel = {
         let title = UILabel()
         title.text = "#Desafio\nWarren"
@@ -24,8 +25,8 @@ class InitialFlowViewController: UIViewController {
         title.translatesAutoresizingMaskIntoConstraints = false
         return title
     }()
-    
-   lazy var loginButton: UIButton = {
+
+    lazy var loginButton: UIButton = {
        let button = UIButton()
        button.backgroundColor = #colorLiteral(red: 0.8682464957, green: 0.1781739593, blue: 0.3401823342, alpha: 1)
        button.layer.cornerRadius = 16
@@ -35,48 +36,50 @@ class InitialFlowViewController: UIViewController {
        button.isEnabled = true
        button.translatesAutoresizingMaskIntoConstraints = false
        return button
-   }()
-   
+    }()
+
     lazy var greyView: UIView = {
         let view = UIView(frame: .zero)
         view.backgroundColor = #colorLiteral(red: 0.1802104115, green: 0.1840381324, blue: 0.2006301582, alpha: 1)
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-   // MARK: Varbles & constants
-   private var initialFlowViewModel: InitialFlowViewModel
-   private let disposeBag = DisposeBag()
-    
-   init(viewModel: InitialFlowViewModel){
+
+    // MARK: Varbles & constants
+    private var initialFlowViewModel: InitialFlowViewModel
+    private let disposeBag = DisposeBag()
+
+    // MARK: Initialization
+    init(viewModel: InitialFlowViewModel){
        self.initialFlowViewModel = viewModel
        super.init(nibName: nil, bundle: nil)
-   }
-   
-   required init?(coder: NSCoder) {
+    }
+
+    required init?(coder: NSCoder) {
        fatalError("init(coder:) has not been implemented")
-   }
-   
-   override func viewDidLoad() {
+    }
+
+    // MARK: View lifecycle
+    override func viewDidLoad() {
        super.viewDidLoad()
        self.navigationController?.isNavigationBarHidden = true
        self.view.backgroundColor = #colorLiteral(red: 0.8682464957, green: 0.1781739593, blue: 0.3401823342, alpha: 1)
        self.buildView()
-   }
-   
-   // MARK: UI Setup
-   fileprivate func buildView() {
+    }
+
+    // MARK: UI Setup
+    fileprivate func buildView() {
         self.buildHierarchy()
         self.buildConstraints()
         self.buildUIActions()
-   }
-   
+    }
+
     fileprivate func buildHierarchy() {
         self.view.addSubview(titleLabel)
         self.view.addSubview(greyView)
         self.greyView.addSubview(loginButton)
-   }
-   
+    }
+
     fileprivate func buildConstraints() {
         NSLayoutConstraint.activate([
             self.titleLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: (self.view.frame.height*0.3)),
@@ -93,8 +96,8 @@ class InitialFlowViewController: UIViewController {
             self.greyView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 0),
             self.greyView.heightAnchor.constraint(equalToConstant: (self.view.frame.height*0.25))
         ])
-   }
-    
+    }
+
     fileprivate func buildUIActions() {
       self.loginButton.rx.tap.subscribe(onNext: {
             [weak self] in
