@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 
 class PortfoliosViewController: UIViewController {
+    
     // MARK: UI Components
     private lazy var portfoliosTableView: UITableView = {
         let portfolios = UITableView(frame: .zero)
