@@ -2,7 +2,7 @@
 //  LoginCoordinator.swift
 //  App
 //
-//  Created by Matheus Lutero on 22/12/21.
+//  Created by Marco Antonio on 22/12/21.
 //  Copyright © 2021 Warren. All rights reserved.
 //
 
@@ -14,27 +14,30 @@ protocol LoginFlowCoordinatorProtocol: Coordinator {
 }
 
 class  LoginFlowCoordinator: Coordinator, LoginFlowCoordinatorProtocol {
-     var finishDelegate: CoordinatorFinishDelegate?
     
+    // MARK: Varbles & Constants
+    var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
-    
     var childCoordinators: [Coordinator] = []
-    
     var type: CoordinatorType { .login }
-        
+    
+    // MARK: Initialization
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
         
+    // MARK: Public functions
     func start() {
-        startLoginViewController()
+        self.startLoginViewController()
     }
     
-    deinit {
-        print("DetailsFlowCoordinator deinit")
+    func dismissSheet(){
+        self.navigationController.dismiss(animated: true)
+        self.finish()
     }
     
-    func startLoginViewController() {
+    // MARK: Internal functions
+    internal func startLoginViewController() {
         let loginViewModel = LoginViewModel(coordinator: self)
         let loginVC: LoginViewController = .init(viewModel: loginViewModel)
         if #available(iOS 15.0, *) {
@@ -49,8 +52,8 @@ class  LoginFlowCoordinator: Coordinator, LoginFlowCoordinatorProtocol {
         self.navigationController.present(loginVC, animated: true, completion: nil)
     }
     
-    func dismissSheet(){
-        self.navigationController.dismiss(animated: true)
-        self.finish()
+    // MARK: Deinitialization
+    deinit {
+        print("DetailsFlowCoordinator deinit")
     }
 }

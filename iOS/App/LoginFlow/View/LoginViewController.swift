@@ -2,7 +2,7 @@
 //  LoginViewController.swift
 //  App
 //
-//  Created by Matheus Lutero on 22/12/21.
+//  Created by Marco Antonio on 22/12/21.
 //  Copyright © 2021 Warren. All rights reserved.
 //
 
@@ -12,6 +12,7 @@ import RxCocoa
 
 class LoginViewController: UIViewController {
     
+    // MARK: UI Components
     private lazy var titleLabel: UILabel = {
         let title = UILabel(frame: .zero)
         title.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
@@ -83,6 +84,7 @@ class LoginViewController: UIViewController {
     private var loginViewModel: LoginViewModel
     private let disposeBag = DisposeBag()
     
+    // MARK: Initialization
     init(viewModel: LoginViewModel){
         self.loginViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -92,13 +94,14 @@ class LoginViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    // MARK: View lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.buildView()
     }
     
     // MARK: UI Setup
-    func buildView() {
+    fileprivate func buildView() {
         self.view.backgroundColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
         self.buildHierarchy()
         self.buildConstraints()
@@ -106,7 +109,7 @@ class LoginViewController: UIViewController {
         self.buildUIActions()
     }
     
-    func buildHierarchy() {
+    fileprivate func buildHierarchy() {
         self.view.addSubview(greyView)
         self.greyView.addSubview(titleLabel)
         self.greyView.addSubview(errorLabel)
@@ -115,7 +118,7 @@ class LoginViewController: UIViewController {
         self.greyView.addSubview(loginButton)
     }
     
-    func buildConstraints() {
+    fileprivate func buildConstraints() {
         NSLayoutConstraint.activate ([
             self.greyView.heightAnchor.constraint(equalToConstant: (self.view.frame.height*0.45)),
             self.greyView.widthAnchor.constraint(equalToConstant: (self.view.frame.width*0.8)),
@@ -162,7 +165,7 @@ class LoginViewController: UIViewController {
           
           self.loginViewModel.login(email: self.emailTextField.text!, password: self.passwordTextField.text!).subscribe(
               onNext: { _ in
-                  self.loginViewModel.finishFlow()
+                  self.loginViewModel.goToPortfoliosFlow()
               },
               onError: { errorMsg in
                   LoadingFactory.sharedInstance.hideLoading()
@@ -174,5 +177,4 @@ class LoginViewController: UIViewController {
           ).disposed(by: self.disposeBag)
         }).disposed(by: self.disposeBag)
     }
-
 }
