@@ -100,12 +100,13 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.isNavigationBarHidden = true
         buildView()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         if self.portfolioImage.image?.pngData() == nil {
-            LoadingView.sharedInstance.showLoadingInImageView(currentImageView: portfolioImage)
+            LoadingFactory.sharedInstance.showLoadingInImageView(currentImageView: portfolioImage)
         }
     }
     
@@ -176,7 +177,7 @@ class DetailsViewController: UIViewController {
         self.detailsViewModel.downloadPortfolioImage(imageUrl: imgUrl).bind { data in
             DispatchQueue.main.async {
                 if self.portfolioImage.image?.pngData() == nil {
-                    LoadingView.sharedInstance.hideLoadingInImageView()
+                    LoadingFactory.sharedInstance.hideLoading()
                 }
                 self.portfolioImage.image = UIImage(data: data)
             }

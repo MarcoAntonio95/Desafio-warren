@@ -79,7 +79,7 @@ extension AppCoordinator: CoordinatorFinishDelegate {
             print("📱 login")
             self.startPortfoliosFlow()
         case .portfolios:
-            break
+            self.showInitialFlow()
         case .details:
             print("📱 detail")
             self.startPortfoliosFlow()

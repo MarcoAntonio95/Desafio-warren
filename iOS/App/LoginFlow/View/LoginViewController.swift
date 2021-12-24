@@ -158,14 +158,14 @@ class LoginViewController: UIViewController {
             [weak self] in
             guard let `self` = self else { return }
           
-          LoadingView.sharedInstance.showIndicatorInView(currentView: self.view)
+          LoadingFactory.sharedInstance.showIndicatorInView(currentView: self.view)
           
           self.loginViewModel.login(email: self.emailTextField.text!, password: self.passwordTextField.text!).subscribe(
               onNext: { _ in
                   self.loginViewModel.finishFlow()
               },
               onError: { errorMsg in
-                  LoadingView.sharedInstance.hideIndicator()
+                  LoadingFactory.sharedInstance.hideLoading()
                   DispatchQueue.main.async {
                       self.errorLabel.text = errorMsg.localizedDescription
                       self.errorLabel.isHidden = false

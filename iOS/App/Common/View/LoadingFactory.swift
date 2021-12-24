@@ -9,15 +9,15 @@
 import Foundation
 import UIKit
 
-public class LoadingView {
+public class LoadingFactory {
+    
+    // MARK: Varbles & Constants
+    public static let sharedInstance = LoadingFactory()
+    fileprivate let blurImg = UIImageView()
+    fileprivate let indicator = UIActivityIndicatorView()
 
-    public static let sharedInstance = LoadingView()
-
-    var blurImg = UIImageView()
-    var indicator = UIActivityIndicatorView()
-
-    private init()
-    {
+    // MARK: View lifecycle & UI Setup
+    init() {
         blurImg.frame = UIScreen.main.bounds
         blurImg.backgroundColor = UIColor.black
         blurImg.isUserInteractionEnabled = true
@@ -28,11 +28,19 @@ public class LoadingView {
         indicator.color = #colorLiteral(red: 0.8682464957, green: 0.1781739593, blue: 0.3401823342, alpha: 1)
         indicator.startAnimating()
     }
-
-    func showIndicator(){
+    
+    // MARK: Public functions
+    func showLoading(){
         DispatchQueue.main.async {
             UIApplication.shared.windows.first { $0.isKeyWindow }?.addSubview(self.blurImg)
             UIApplication.shared.windows.first { $0.isKeyWindow }?.addSubview(self.indicator)
+        }
+    }
+    
+    func hideLoading(){
+        DispatchQueue.main.async {
+                self.blurImg.removeFromSuperview()
+                self.indicator.removeFromSuperview()
         }
     }
     
@@ -44,15 +52,6 @@ public class LoadingView {
         }
     }
     
-    func hideIndicator(){
-        DispatchQueue.main.async {
-                self.blurImg.removeFromSuperview()
-                self.indicator.removeFromSuperview()
-        }
-    }
-}
-
-extension LoadingView {
     func showLoadingInImageView(currentImageView: UIImageView){
         DispatchQueue.main.async {
             currentImageView.addSubview(self.blurImg)
@@ -63,10 +62,5 @@ extension LoadingView {
             currentImageView.addSubview(self.indicator)
         }
     }
-    
-    func hideLoadingInImageView(){
-        DispatchQueue.main.async {
-            self.indicator.removeFromSuperview()
-        }
-    }
 }
+

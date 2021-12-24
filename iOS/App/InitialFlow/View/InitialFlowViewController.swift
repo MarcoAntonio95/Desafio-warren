@@ -59,6 +59,7 @@ class InitialFlowViewController: UIViewController {
    
    override func viewDidLoad() {
        super.viewDidLoad()
+       self.navigationController?.isNavigationBarHidden = true
        self.view.backgroundColor = #colorLiteral(red: 0.8682464957, green: 0.1781739593, blue: 0.3401823342, alpha: 1)
        self.buildView()
    }

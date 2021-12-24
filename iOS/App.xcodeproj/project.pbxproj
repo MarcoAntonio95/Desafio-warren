@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F3A42572773A83D0083C6F9 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A42562773A83D0083C6F9 /* LoadingView.swift */; };
+		2F3A42572773A83D0083C6F9 /* LoadingFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F3A42562773A83D0083C6F9 /* LoadingFactory.swift */; };
 		2F56427E2773C1D8004DBCC1 /* Portfolio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56427D2773C1D8004DBCC1 /* Portfolio.swift */; };
 		2F5642802773C508004DBCC1 /* PortfolioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F56427F2773C508004DBCC1 /* PortfolioTableViewCell.swift */; };
 		2F8403772772D4AE0054A045 /* LoginCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F8403762772D4AE0054A045 /* LoginCoordinator.swift */; };
@@ -45,7 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2F3A42562773A83D0083C6F9 /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		2F3A42562773A83D0083C6F9 /* LoadingFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingFactory.swift; sourceTree = "<group>"; };
 		2F56427D2773C1D8004DBCC1 /* Portfolio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Portfolio.swift; sourceTree = "<group>"; };
 		2F56427F2773C508004DBCC1 /* PortfolioTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioTableViewCell.swift; sourceTree = "<group>"; };
 		2F8403762772D4AE0054A045 /* LoginCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginCoordinator.swift; sourceTree = "<group>"; };
@@ -97,7 +97,7 @@
 		2F3A42552773A7CD0083C6F9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2F3A42562773A83D0083C6F9 /* LoadingView.swift */,
+				2F3A42562773A83D0083C6F9 /* LoadingFactory.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -467,7 +467,7 @@
 				2FEF63E32771861B006882D6 /* InitialFlowCoordinator.swift in Sources */,
 				2FEF63C627714D5D006882D6 /* PortifoliosFlowCoordinator.swift in Sources */,
 				332C227D23FEBCE0007823E5 /* SceneDelegate.swift in Sources */,
-				2F3A42572773A83D0083C6F9 /* LoadingView.swift in Sources */,
+				2F3A42572773A83D0083C6F9 /* LoadingFactory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
