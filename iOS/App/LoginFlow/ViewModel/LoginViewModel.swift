@@ -34,15 +34,29 @@ final class LoginViewModel {
     }
 
     // MARK: Public functions
+    
+    /// Function used to login the user.
+    ///
+    /// - warning: This function is asynchronous and queries a web service. Your response time may vary depending on current conditions.
+    /// - parameter email: User email as string.
+    /// - parameter password: User password as string.
+    /// - returns: Observable string representation of user access token
     func login(email:String,password:String) -> Observable<String> {
        return APIService.sharedInstance.postLoginInAPI(email: email, password: password)
     }
 
+    /// Function used to change to portfolios view .
+    ///
     func goToPortfoliosFlow(){
         self.coordinator.dismissSheet()
     }
     
     // MARK: Privated functions
+    
+    /// Function used to verify if email inputed is valid.
+    ///
+    /// - parameter email: User email as string.
+    /// - returns: Bool representing if email is valid
     func validateEmail(email:String) -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let predicate = NSPredicate(format:"SELF MATCHES %@", emailRegex)
