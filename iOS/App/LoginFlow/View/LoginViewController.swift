@@ -40,8 +40,9 @@ class LoginViewController: UIViewController {
         email.layer.borderWidth = 2.0
         email.layer.borderColor = #colorLiteral(red: 0.8682464957, green: 0.1781739593, blue: 0.3401823342, alpha: 1)
         email.placeholder = "  email:"
+        email.restorationIdentifier = "emailTextfield"
+        email.accessibilityIdentifier = "emailTextfield"
         email.layer.cornerRadius = 20
-        email.text = "mobile_test@warrenbrasil.com"
         email.translatesAutoresizingMaskIntoConstraints = false
         return email
     }()
@@ -51,10 +52,11 @@ class LoginViewController: UIViewController {
         password.layer.borderWidth = 2.0
         password.layer.borderColor = #colorLiteral(red: 0.8682464957, green: 0.1781739593, blue: 0.3401823342, alpha: 1)
         password.placeholder = "  password:"
+        password.restorationIdentifier = "passwordTextfield"
+        password.accessibilityIdentifier = "passwordTextfield"
         password.layer.cornerRadius = 20
         password.isEnabled = true
         password.isSecureTextEntry = true
-        password.text = "Warren123!"
         password.translatesAutoresizingMaskIntoConstraints = false
         return password
     }()
@@ -63,7 +65,9 @@ class LoginViewController: UIViewController {
         let button = UIButton(frame: .zero)
         button.backgroundColor = #colorLiteral(red: 0.8682464957, green: 0.1781739593, blue: 0.3401823342, alpha: 1)
         button.layer.cornerRadius = 24
-        button.setTitle("Login!", for: .normal)
+        button.setTitle("Login", for: .normal)
+        button.restorationIdentifier = "loginButton"
+        button.accessibilityIdentifier = "loginButton"
         button.setTitleColor(.white, for: .normal)
         button.setTitleColor(.gray, for: .disabled)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
